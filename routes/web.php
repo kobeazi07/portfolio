@@ -22,3 +22,6 @@ Route::get('/dashboard',[PortfolioController::class, 'dashboard'])->name('Halama
 Route::get('/portfolio',[PortfolioController::class, 'portfolio'])->name('HalamanPortfolio');
 
 Route::post('/tambah_portfolio',[PortfolioController::class, 'tambah_portfolio'])->name('Tambah_Portfolio');
+Route::post('/edit_portfolio/{id}',[PortfolioController::class, 'edit_portfolio'])->name('Edit_Portoflio');
+Route::delete('/portfolio/detail-picture/{id}', [PortfolioController::class, 'deletePicture']);
+Route::delete('/portfolio/{portfolio}', [PortfolioController::class, 'destroy'])->name('Portfolio.destroy');

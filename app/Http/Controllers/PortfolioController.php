@@ -18,7 +18,8 @@ class PortfolioController extends Controller
         return view ('backend.pages.dashboard');
     }
         public function portfolio(){
-        return view ('backend.pages.portfolio');
+        $portfolio = Portfolio::with('pictures')->get();
+        return view ('backend.pages.portfolio',compact('portfolio'));
     }
 
      public function tambah_portfolio(Request $request){
@@ -29,10 +30,16 @@ class PortfolioController extends Controller
         // ]);
           $thumbnailPath = null; 
 // dd($request->all());
-        if ($request->hasFile('thumbnail')) {
-            $thumbnailPath = $request->file('thumbnail')
-                ->store('portfolio/thumbnail', 'public');
-        }
+        // if ($request->hasFile('thumbnail')) {
+        //     $thumbnailPath = $request->file('thumbnail')
+        //         ->store('portfolio/thumbnail', 'public');
+        // }
+           if ($request->hasFile('thumbnail')) {
+        $thumbnail = $request->file('thumbnail');
+        $thumbnailName = uniqid().'_thumbnail_'.$thumbnail->getClientOriginalName();
+        $thumbnail->move(public_path('inputan/thumbnail/img'), $thumbnailName);
+        $thumbnailPath = 'inputan/thumbnail/img/'.$thumbnailName;
+    }
 
          $portfolio = Portfolio::create([
             'judul'   => $request->judul,
@@ -42,18 +49,100 @@ class PortfolioController extends Controller
 
         $portfolio_id = $portfolio->id;
 
-     if ($request->hasFile('files')) {
-        foreach ($request->file('files') as $file) {
-            $path = $file->store('portfolio/detail', 'public');
+        if ($request->hasFile('files')) {
+            foreach ($request->file('files') as $file) {
+                $fileName = uniqid().'_'.$file->getClientOriginalName();
+                $file->move(public_path('inputan/thumbnail/detailimg'), $fileName);
 
-            DetailPicture::create([
-                'portfolio_id' => $portfolio_id ,
-                'gambar'     => $path,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+                DetailPicture::create([
+                    'portfolio_id' => $portfolio_id ,
+                    'gambar'     => $fileName,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
         }
-    }
      }
+     public function deletePicture($id)
+{
+    $picture = DetailPicture::findOrFail($id);
+
+    // hapus file fisik
+    $filePath = public_path($picture->gambar);
+    if (file_exists($filePath)) {
+        unlink($filePath);
+    }
+
+    $picture->delete();
+
+    return response()->json([
+        'success' => true
+    ]);
+}
+
+public function edit_portfolio(Request $request, $id)
+{
+    $portfolio =   portfolio::find($id);
+       $data = [
+    'judul'     => $request->judul,
+    'deskripsi' => $request->deskripsi,
+];
+
+// cek jika ada thumbnail baru
+if ($request->hasFile('thumbnail')) {
+
+    $thumbnail = $request->file('thumbnail');
+    $thumbnailName = uniqid().'_thumbnail_'.$thumbnail->getClientOriginalName();
+    $thumbnail->move(public_path('inputan/thumbnail/img'), $thumbnailName);
+
+    $data['gambar'] = 'inputan/thumbnail/img/' . $thumbnailName;
+}
+
+// update data
+Portfolio::where('id', $id)->update($data);
+        //  dd($id);   
+    $portfolio_id = $id;
+        if ($request->hasFile('files')) {
+            foreach ($request->file('files') as $file) {
+                $fileName = uniqid().'_'.$file->getClientOriginalName();
+                $file->move(public_path('inputan/thumbnail/detailimg'), $fileName);
+
+                DetailPicture::create([
+                    'portfolio_id' => $portfolio_id ,
+                    'gambar'     => $fileName,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+        }
+        return response()->json([
+        'status' => 1,
+        'message' => 'Portfolio berhasil diupdate'
+    ]);
+}
+public function destroy(Portfolio $portfolio)
+{
+    
+    foreach ($portfolio->pictures as $picture) {
+        $filePath = public_path('inputan/thumbnail/detailimg/'.$picture->gambar);
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
+
+        $picture->delete();
+    }
+
+    if ($portfolio->gambar && file_exists(public_path($portfolio->gambar))) {
+        unlink(public_path($portfolio->gambar));
+    }
+    $portfolio->delete();
+
+    return response()->json([
+        'status'  => 1,
+        'message' => 'Portfolio & gambar berhasil dihapus'
+    ]);
+}
+
+
 }
     

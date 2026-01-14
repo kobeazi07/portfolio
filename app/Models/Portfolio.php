@@ -10,4 +10,8 @@ class Portfolio extends Model
     use HasFactory;
      protected $table ='portfolio';
     protected $guarded =[];
+        public function pictures()
+    {
+        return $this->hasMany(DetailPicture::class, 'portfolio_id');
+    }
 }
