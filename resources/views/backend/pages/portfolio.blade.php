@@ -227,8 +227,6 @@
         $('#btnSaveProgram').on('click', function() {
             let form = document.getElementById('formportfolio');
             let formData = new FormData(form);
-
-            // 🔥 PAKSA ISI DESKRIPSI DARI CKEDITOR
             if (CKEDITOR.instances.deskripsi) {
                 formData.set('deskripsi', CKEDITOR.instances.deskripsi.getData());
             }
