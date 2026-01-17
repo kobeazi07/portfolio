@@ -62,6 +62,11 @@ class PortfolioController extends Controller
                 ]);
             }
         }
+           return response()->json([
+        'status' => 1,
+        'message' => 'Portfolio berhasil diupdate'
+    ]);
+
      }
      public function deletePicture($id)
 {

@@ -18,14 +18,16 @@
               <span>Dashboard</span></a>
       </li>
 
+      <li class="nav-item {{ Route::is('HalamanDashboard') ? 'active' : '' }}">
+          <a class="nav-link" href="{{ Route('HalamanDashboard') }}">
+              <i class="fas fa-fw fa-tachometer-alt"></i>
+              <span>About</span></a>
+      </li>
+
       <!-- Divider -->
       <hr class="sidebar-divider">
 
       <!-- Heading -->
-      <div class="sidebar-heading">
-          Interface
-      </div>
-
       <!-- Nav Item - Pages Collapse Menu -->
       <!-- Nav Item - Utilities Collapse Menu -->
       <!-- Divider -->
@@ -36,6 +38,12 @@
               <i class="fas fa-fw fa-table"></i>
               <span>Portfolio</span></a>
       </li>
+      <li class="nav-item {{ Route::is('HalamanAbout') ? 'active' : '' }}">
+          <a class="nav-link" href="{{ Route('HalamanAbout') }}">
+              <i class="fas fa-fw fa-table"></i>
+              <span>About</span></a>
+      </li>
+
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
