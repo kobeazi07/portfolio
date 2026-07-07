@@ -23,7 +23,7 @@
             <div class="about">
                 <div class="about-img-holder">
 
-                    <img src="{{ $abouts->img }}" class="about-img rounded-lg"
+                    <img src="{{ $abouts->gambar }}" class="about-img rounded-lg"
                         alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
                 </div>
                 <div class="about-caption">
@@ -32,7 +32,14 @@
                     <p>
                         {{ strip_tags($abouts->deskripsi) }}
                     </p>
-                    <button class="btn-rounded btn btn-outline-primary mt-4">Download CV</button>
+                    @foreach ($cv as $cv)
+                        <a href="{{ asset($cv->cv) }}">
+
+                            <button class="btn-rounded btn btn-outline-primary mt-4">Download CV</button>
+                        </a>
+                    @endforeach
+
+
                 </div>
             </div><!-- end of about wrapper -->
         </div><!-- end of container -->
@@ -50,38 +57,49 @@
                         <div class="body">
                             <img src="assets/imgs/pencil-case.svg" alt="" class="icon">
                             <h6 class="title">Technical Writer</h6>
-                            <p class="subtitle">Labore velit culpa adipisci excepturi consequuntur itaque in nam
-                                molestias dolorem iste quod.</p>
+                            <p class="subtitle">
+                                Create clear, well-structured technical documentation, user guides, API references, and
+                                software manuals.
+                            </p>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-6 col-lg-3">
                     <div class="service-card">
                         <div class="body">
                             <img src="assets/imgs/responsive.svg" alt="" class="icon">
                             <h6 class="title">Fixing Laravel Apps Bugs</h6>
-                            <p class="subtitle">Labore velit culpa adipisci excepturi consequuntur itaque in nam
-                                molestias dolorem iste quod.</p>
+                            <p class="subtitle">
+                                Identify, troubleshoot, and resolve Laravel application issues to improve performance,
+                                security, and stability.
+                            </p>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-6 col-lg-3">
                     <div class="service-card">
                         <div class="body">
                             <img src="assets/imgs/toolbox.svg" alt="" class="icon">
-                            <h6 class="title">Collaborate to Make Project with PHP</h6>
-                            <p class="subtitle">Labore velit culpa adipisci excepturi consequuntur itaque in nam
-                                molestias dolorem iste quod.</p>
+                            <h6 class="title">Collaborate to Make Projects with PHP</h6>
+                            <p class="subtitle">
+                                Collaborate with teams to build scalable PHP web applications using modern frameworks and
+                                best practices.
+                            </p>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-6 col-lg-3">
                     <div class="service-card">
                         <div class="body">
                             <img src="assets/imgs/analytics.svg" alt="" class="icon">
                             <h6 class="title">UI/UX Designer</h6>
-                            <p class="subtitle">Labore velit culpa adipisci excepturi consequuntur itaque in nam
-                                molestias dolorem iste quod.</p>
+                            <p class="subtitle">
+                                Design intuitive, user-friendly interfaces and engaging user experiences for websites and
+                                mobile applications.
+                            </p>
                         </div>
                     </div>
                 </div>

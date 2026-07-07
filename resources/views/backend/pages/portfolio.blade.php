@@ -368,7 +368,13 @@
             CKEDITOR.replace('deskripsi');
         });
         document.addEventListener("DOMContentLoaded", function() {
-            CKEDITOR.replace('deskripsi2-{{ $portfolio->id }}');
+
+            document.querySelectorAll('.editor').forEach(function(el) {
+
+                CKEDITOR.replace(el.id);
+
+            });
+
         });
 
         function deletePicture(id) {

@@ -97,7 +97,7 @@
                                         @else
                                             <p>Gambar Kosong</p>
                                         @endif
-                                    </td>
+                                    </td> 0
                                     <td>
 
                                         <button type="button" class="btn btn-primary" data-toggle="modal"
@@ -258,7 +258,13 @@
             CKEDITOR.replace('deskripsi');
         });
         document.addEventListener("DOMContentLoaded", function() {
-            CKEDITOR.replace('deskripsi2-{{ $about->id }}');
+
+            document.querySelectorAll('.editor').forEach(function(el) {
+
+                CKEDITOR.replace(el.id);
+
+            });
+
         });
 
         $(document).on('submit', '.editformabout', function(e) {

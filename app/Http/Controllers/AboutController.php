@@ -32,7 +32,7 @@ class AboutController extends Controller
          $about = About::create([
             'judul'   => $request->judul,
             'deskripsi' => $request->deskripsi,
-            'img' => $thumbnailPath
+            'gambar' => $thumbnailPath
          ]);
                 return response()->json([
                 'status' => 1,
@@ -56,7 +56,7 @@ if ($request->hasFile('thumbnail')) {
     $thumbnailName = uniqid().'_thumbnail_'.$thumbnail->getClientOriginalName();
     $thumbnail->move(public_path('inputan/thumbnail/about'), $thumbnailName);
 
-    $data['img'] = 'inputan/thumbnail/about/' . $thumbnailName;
+    $data['gambar'] = 'inputan/thumbnail/about/' . $thumbnailName;
 }
 
 // update data

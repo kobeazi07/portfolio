@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +8,7 @@
     <meta name="author" content="Devcrud">
     <title>Hibatul Azizi Portfolio</title>
     <!-- font icons -->
-  @include('frontend.includes.style')
+    @include('frontend.includes.style')
 </head>
 
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
@@ -22,18 +21,22 @@
     <div class="container">
         <footer class="footer">
             <p class="mb-0">
-              Follow Me On 
+                Follow Me On
             </p>
             <div class="social-links text-right m-auto ml-sm-auto">
-              
-                <a href="javascript:void(0)" class="link"><i class="ti-linkedin"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-instagram"></i></a>
-          
+
+                <a href="https://www.linkedin.com/in/hibatul-azizi-676a9314a/?locale=en" class="link"><i
+                        class="ti-linkedin"></i></a>
+                <a href="https://www.instagram.com/kobeazi07/" class="link"><i class="ti-instagram"></i></a>
+                <a href="mailto:kobeazi07@gmail.com?subject=Project%20Inquiry" class="link">
+                    <i class="ti-email"></i>
+                </a>
+
             </div>
         </footer>
     </div> <!-- end of page footer -->
 
-  @include('frontend.includes.script')
+    @include('frontend.includes.script')
 </body>
 
 </html>
